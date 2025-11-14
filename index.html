@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wettiq Mini</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 520px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px 20px 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.12);
+        }
+        h2 {
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            height: 140px;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            resize: none;
+            font-family: inherit;
+        }
+        .buttons-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-main {
+            flex: 1;
+            background: #0077cc;
+            color: white;
+        }
+        .btn-main:hover {
+            background: #005fa3;
+        }
+        .btn-secondary {
+            flex: 1;
+            background: #eeeeee;
+            color: #333333;
+        }
+        .btn-secondary:hover {
+            background: #dddddd;
+        }
+        .tip-box {
+            background: #e8f0ff;
+            padding: 12px 12px 10px 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+            position: relative;
+            white-space: pre-line;
+        }
+        .tip-actions {
+            margin-top: 8px;
+            text-align: right;
+        }
+        .btn-delete {
+            background: #dddddd;
+            color: #333333;
+        }
+        .btn-delete:hover {
+            background: #c5c5c5;
+        }
+        .info {
+            font-size: 13px;
+            color: #555555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h2>Wettiq Mini</h2>
+
+        <p>Füge einen Tipp im CleverTip-Format ein:</p>
+
+        <textarea id="inputArea" placeholder="z. B.:
+Kroatien
+VS
+Färöer-Inseln
+TargetTIPP
+Über 2,5 Tore
+Chart QUOTE
+1.50"></textarea>
+
+        <div class="buttons-row">
+            <button class="btn-main" onclick="tippHinzufuegen()">Tipp hinzufügen</button>
+            <button class="btn-secondary" onclick="kopiereFuerTelegram()">Text für Telegram kopieren</button>
+        </div>
+
+        <p class="info">
+            Hinweise:
+            - Du kannst Tipps mit 6 oder 7 Zeilen einfügen.
+            - Wenn du keine Quote einfügst, wird automatisch „-„ gesetzt.
+            - Alle Tipps werden im Browser gespeichert und beim nächsten Öffnen wieder angezeigt.
+            - Mit dem Kopierknopf bekommst du einen fertigen Text für Telegram.
+        </p>
+
+        <div id="alleTipps"></div>
+
+    </div>
+
+    <script>
+        let tipps = [];
+
+        function ladeTipps() {
+            const gespeichert = localStorage.getItem("wettiq_tipps");
+            if (gespeichert) {
+                try {
+                    tipps = JSON.parse(gespeichert);
+                } catch (e) {
+                    tipps = [];
+                }
+                renderTipps();
+            }
+        }
+
+        function speichereTipps() {
+            localStorage.setItem("wettiq_tipps", JSON.stringify(tipps));
+        }
+
+        function parseQuote(quoteText) {
+            if (!quoteText || quoteText === "-") return 0;
+            let q = quoteText.replace(/[^\d,\.]/g, "").replace(",", ".");
+            let zahl = parseFloat(q);
+            if (isNaN(zahl)) {
+                return 0;
+            }
+            return zahl;
+        }
+
+        function sortiereTipps() {
+            tipps.sort((a, b) => parseQuote(b.quote) - parseQuote(a.quote));
+        }
+
+        function tippHinzufuegen() {
+            let text = document.getElementById("inputArea").value.trim();
+            if (text === "") {
+                alert("Bitte einen Tipp einfügen");
+                return;
+            }
+
+            let zeilen = text.split("\n").map(z => z.trim()).filter(z => z !== "");
+
+            // Mindestens:
+            // 0: Team 1
+            // 1: VS
+            // 2: Team 2
+            // 3: TargetTIPP
+            // 4: Tipp
+            // 5: Chart QUOTE
+            if (zeilen.length < 6) {
+                alert("Format falsch. Bitte wie bei CleverTip einfügen.");
+                return;
+            }
+
+            let team1 = zeilen[0];
+            let team2 = zeilen[2];
+            let tippText = zeilen[4];
+
+            // Standard Quote = "-"
+            let quoteText = "-";
+
+            // Wenn es mindestens 7 Zeilen gibt, letzte als Quote nehmen (z. B. 1.50)
+            if (zeilen.length >= 7) {
+                quoteText = zeilen[6];
+            }
+
+            let tippObjekt = {
+                team1: team1,
+                team2: team2,
+                tipp: tippText,
+                quote: quoteText
+            };
+
+            tipps.push(tippObjekt);
+            sortiereTipps();
+            speichereTipps();
+            renderTipps();
+
+            document.getElementById("inputArea").value = "";
+        }
+
+        function tippLoeschen(index) {
+            tipps.splice(index, 1);
+            speichereTipps();
+            renderTipps();
+        }
+
+        function renderTipps() {
+            const container = document.getElementById("alleTipps");
+            container.innerHTML = "";
+
+            tipps.forEach((t, index) => {
+                let box = document.createElement("div");
+                box.className = "tip-box";
+
+                let text =
+                    "Spiel: " + t.team1 + " - " + t.team2 +
+                    "\nTipp: " + t.tipp +
+                    "\nQuote: " + t.quote;
+
+                box.textContent = text;
+
+                let actions = document.createElement("div");
+                actions.className = "tip-actions";
+
+                let delButton = document.createElement("button");
+                delButton.className = "btn-delete";
+                delButton.textContent = "Löschen";
+                delButton.onclick = function () {
+                    tippLoeschen(index);
+                };
+
+                actions.appendChild(delButton);
+                box.appendChild(actions);
+                container.appendChild(box);
+            });
+        }
+
+        function kopiereFuerTelegram() {
+            if (tipps.length === 0) {
+                alert("Es sind keine Tipps vorhanden.");
+                return;
+            }
+
+            let teile = [];
+            tipps.forEach((t, index) => {
+                let block =
+                    "Tipp " + (index + 1) + "\n" +
+                    "Spiel: " + t.team1 + " - " + t.team2 + "\n" +
+                    "Tipp: " + t.tipp + "\n" +
+                    "Quote: " + t.quote;
+                teile.push(block);
+            });
+
+            let gesamtText = teile.join("\n\n");
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(gesamtText)
+                    .then(() => {
+                        alert("Text für Telegram wurde kopiert.");
+                    })
+                    .catch(() => {
+                        alert("Kopieren nicht möglich. Text bitte manuell markieren und kopieren.");
+                    });
+            } else {
+                alert("Kopieren nicht unterstützt. Text bitte manuell markieren und kopieren.");
+            }
+        }
+
+        window.onload = ladeTipps;
+    </script>
+</body>
+</html>
