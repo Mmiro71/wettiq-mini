@@ -1,272 +1,282 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Wettiq VIP – Tages-Tipps</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, system-ui, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Wettiq VIP – Tages-Tipps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #161b2b 0, #050712 45%, #02030a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #f5f5f5;
-    }
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #161b2b 0, #050712 45%, #02030a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 12px;
+            color: #f5f5f5;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
 
-    .wrapper {
-      width: 100%;
-      max-width: 980px;
-      padding: 32px 16px;
-    }
+        .wrapper {
+            width: 100%;
+            max-width: 980px;
+            background: rgba(4, 8, 20, 0.96);
+            border-radius: 28px;
+            padding: 28px 24px 28px;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(142, 160, 255, 0.18);
+        }
 
-    .card {
-      background: rgba(6, 9, 22, 0.96);
-      border-radius: 24px;
-      padding: 28px 24px 24px;
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.65);
-      border: 1px solid rgba(92, 142, 255, 0.35);
-      backdrop-filter: blur(24px);
-    }
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
 
-    .header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
+        .title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
 
-    .title {
-      font-size: 24px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #f9fafb;
-    }
+        .title {
+            letter-spacing: 0.22em;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #a6b4ff;
+        }
 
-    .subtitle {
-      font-size: 13px;
-      color: #c1c9ff;
-      opacity: 0.85;
-    }
+        .subtitle {
+            font-size: 13px;
+            color: rgba(223, 229, 255, 0.82);
+        }
 
-    .badge {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(247, 208, 120, 0.65);
-      color: #f7d078;
-      background: radial-gradient(circle at top left, rgba(247, 208, 120, 0.24), transparent 55%);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      white-space: nowrap;
-    }
+        .tag-pill {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 222, 130, 0.8);
+            background: linear-gradient(90deg, rgba(255, 204, 102, 0.12), rgba(255, 222, 158, 0.06));
+            color: #ffdf92;
+        }
 
-    .section-title {
-      font-size: 16px;
-      margin-bottom: 10px;
-      color: #e5e7eb;
-    }
+        .section-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #f5f7ff;
+        }
 
-    .input-area {
-      margin-bottom: 18px;
-    }
+        .hint {
+            font-size: 11px;
+            line-height: 1.5;
+            color: rgba(211, 220, 255, 0.82);
+            margin-top: 10px;
+        }
 
-    textarea {
-      width: 100%;
-      min-height: 150px;
-      max-height: 220px;
-      resize: vertical;
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 255, 0.45);
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.20), rgba(15, 23, 42, 0.9));
-      padding: 14px 16px;
-      color: #e5e7eb;
-      font-size: 14px;
-      outline: none;
-      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
-    }
+        .hint span {
+            color: #ffb66a;
+        }
 
-    textarea::placeholder {
-      color: rgba(209, 213, 219, 0.35);
-    }
+        .textarea-wrapper {
+            margin-top: 12px;
+            margin-bottom: 14px;
+        }
 
-    .buttons-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            resize: vertical;
+            padding: 14px 14px 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(112, 129, 255, 0.6);
+            background: radial-gradient(circle at 0 0, rgba(33, 46, 90, 0.52), rgba(6, 10, 30, 0.96));
+            color: #f5f7ff;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+        }
 
-    button {
-      border-radius: 999px;
-      border: none;
-      padding: 11px 20px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, background 0.1s ease-out;
-      white-space: nowrap;
-    }
+        textarea::placeholder {
+            color: rgba(165, 176, 220, 0.7);
+        }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      color: white;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
-    }
+        .controls-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.60);
-    }
+        .btn {
+            border-radius: 999px;
+            padding: 11px 18px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease, opacity 0.08s ease;
+            font-family: inherit;
+            white-space: nowrap;
+        }
 
-    .btn-secondary {
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      border: 1px solid rgba(148, 163, 255, 0.45);
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, #2f66ff, #4978ff);
+            color: #fdfdff;
+            box-shadow: 0 9px 22px rgba(10, 40, 120, 0.72);
+        }
 
-    .btn-secondary:hover {
-      background: rgba(24, 32, 62, 0.98);
-    }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 11px 26px rgba(10, 40, 120, 0.85);
+        }
 
-    .btn-danger {
-      background: rgba(127, 29, 29, 0.92);
-      color: #fee2e2;
-      border: 1px solid rgba(239, 68, 68, 0.7);
-    }
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(113, 135, 255, 0.7);
+            color: #d9e0ff;
+        }
 
-    .btn-danger:hover {
-      background: rgba(153, 27, 27, 0.96);
-    }
+        .btn-ghost:hover {
+            background: rgba(19, 32, 94, 0.6);
+            box-shadow: 0 7px 18px rgba(10, 24, 90, 0.55);
+        }
 
-    .hint {
-      font-size: 12px;
-      line-height: 1.4;
-      color: #9ca3af;
-      margin-bottom: 18px;
-    }
+        .btn-danger {
+            background: linear-gradient(135deg, #be2d42, #e34a4f);
+            color: #fff7f8;
+            box-shadow: 0 9px 22px rgba(136, 14, 39, 0.6);
+        }
 
-    .hint span {
-      color: #e5e7eb;
-    }
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 11px 26px rgba(136, 14, 39, 0.8);
+        }
 
-    .tips-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
+        .tips-list {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .tip-card {
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), rgba(15, 23, 42, 0.95));
-      border-radius: 18px;
-      padding: 13px 14px;
-      border: 1px solid rgba(148, 163, 255, 0.5);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
+        .tip-card {
+            border-radius: 22px;
+            padding: 13px 16px;
+            background: radial-gradient(circle at 0 0, rgba(40, 58, 120, 0.38), rgba(8, 12, 34, 0.98));
+            border: 1px solid rgba(118, 138, 255, 0.35);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .tip-main {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      font-size: 14px;
-      color: #e5e7eb;
-    }
+        .tip-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
 
-    .tip-match {
-      font-weight: 500;
-    }
+        .tip-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: rgba(179, 192, 255, 0.9);
+        }
 
-    .tip-line {
-      font-size: 13px;
-      color: #d1d5db;
-    }
+        .tip-match {
+            font-size: 14px;
+            color: #f7f8ff;
+        }
 
-    .tip-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      min-width: 120px;
-    }
+        .tip-pick {
+            font-size: 13px;
+            color: rgba(211, 220, 255, 0.9);
+        }
 
-    .quote-pill {
-      border-radius: 999px;
-      border: 1px solid rgba(129, 140, 248, 0.9);
-      padding: 4px 11px;
-      font-size: 12px;
-      color: #e5e7eb;
-      background: radial-gradient(circle at top, rgba(59, 130, 246, 0.4), rgba(15, 23, 42, 0.98));
-    }
+        .chip-row {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
 
-    .btn-small {
-      padding: 6px 10px;
-      font-size: 12px;
-      border-radius: 999px;
-      background: rgba(31, 41, 55, 0.96);
-      color: #e5e7eb;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-    }
+        .chip {
+            border-radius: 999px;
+            padding: 5px 11px;
+            font-size: 12px;
+            border: 1px solid rgba(176, 196, 255, 0.85);
+            color: #e4ebff;
+        }
 
-    .btn-small:hover {
-      background: rgba(55, 65, 81, 0.98);
-    }
+        .btn-small {
+            padding: 7px 12px;
+            font-size: 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(111, 130, 220, 0.9);
+            background: rgba(8, 15, 52, 0.9);
+            color: #cdd7ff;
+            cursor: pointer;
+        }
 
-    @media (max-width: 720px) {
-      .card {
-        padding: 20px 16px 18px;
-        border-radius: 20px;
-      }
+        .footer-hint {
+            margin-top: 10px;
+            font-size: 11px;
+            color: rgba(170, 183, 230, 0.9);
+        }
 
-      .header-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+        .footer-hint span {
+            color: #ffcb7a;
+        }
 
-      .title {
-        font-size: 20px;
-      }
+        @media (max-width: 720px) {
+            .wrapper {
+                padding: 20px 16px 20px;
+                border-radius: 22px;
+            }
 
-      .buttons-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
+            .tip-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-      .tip-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+            .chip-row {
+                align-items: flex-start;
+            }
 
-      .tip-meta {
-        align-items: flex-start;
-      }
-    }
-  </style>
+            .controls-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn, .btn-small {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="card">
-      <div class="header-row">
-        <div>
-          <div class="title">Wettiq VIP</div>
-          <div class="subtitle">Tages-Tipps vorbereiten und als Karte anzeigen</div>
+<div class="wrapper">
+    <div class="header-row">
+        <div class="title-block">
+            <div class="title">Wettiq VIP</div>
+            <div class="subtitle">Tages-Tipps vorbereiten und als Karte anzeigen</div>
         </div>
-        <div class="badge">Vip testphase</div>
-      </div>
+        <div class="tag-pill">VIP Testphase</div>
+    </div>
 
-      <div class="section-title">Rohdaten aus CleverTip einfügen</div>
-      <div class="input-area">
-        <textarea id="rawInput" placeholder="Beispiel:
+    <div>
+        <div class="section-title">Rohdaten aus CleverTip einfügen</div>
+        <div class="textarea-wrapper">
+            <textarea id="rawInput" placeholder="Beispiel:
 
 Kroatien
 VS
@@ -275,179 +285,212 @@ TargetTIPP
 Über 2,5 Tore
 Chart QUOTE
 1.50"></textarea>
-      </div>
-
-      <div class="buttons-row">
-        <button class="btn-primary" id="btnAdd">Tipp hinzufügen</button>
-        <button class="btn-secondary" id="btnOpenCard">Tageskarte anzeigen</button>
-        <button class="btn-danger" id="btnClear">Alle Tipps löschen</button>
-      </div>
-
-      <p class="hint">
-        Hinweise: Du kannst Tipps mit 6 oder 7 Zeilen einfügen. Wenn du keine Quote kopierst, wird automatisch <span>"-"</span> gesetzt. Alle Tipps werden im Browser gespeichert und beim nächsten Öffnen wieder angezeigt.
-      </p>
-
-      <div id="tipsContainer" class="tips-list"></div>
+        </div>
+        <div class="controls-row">
+            <button class="btn btn-primary" id="btnAdd">Tipp hinzufügen</button>
+            <button class="btn btn-ghost" id="btnShowCard">Tageskarte anzeigen</button>
+            <button class="btn btn-danger" id="btnClear">Alle Tipps löschen</button>
+        </div>
+        <div class="hint">
+            Hinweise:
+            Du kannst Tipps mit 6 oder 7 Zeilen einfügen (CleverTip-Format).
+            Wenn du keine Quote kopierst, wird automatisch „-“ gesetzt.
+            Alle Tipps werden nur in deinem Browser gespeichert.
+        </div>
     </div>
-  </div>
 
-  <script>
-    const STORAGE_KEY = "wettiq_tips";
+    <div class="tips-list" id="tipsList"></div>
+
+    <div class="footer-hint">
+        Tipp:
+        <span>Erst Tipps eintragen, dann „Tageskarte anzeigen“ und dort „Als Bild herunterladen“ benutzen.</span>
+    </div>
+</div>
+
+<script>
+    const STORAGE_KEY = "wettiqTips";
 
     function loadTips() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        console.error("Fehler beim Laden der Tipps", e);
-        return [];
-      }
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return [];
+            const arr = JSON.parse(raw);
+            return Array.isArray(arr) ? arr : [];
+        } catch (e) {
+            return [];
+        }
     }
 
     function saveTips(tips) {
-      try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(tips));
-      } catch (e) {
-        console.error("Fehler beim Speichern der Tipps", e);
-      }
+    }
+
+    function parseCleverTip(raw) {
+        const lines = raw
+            .split(/\r?\n/)
+            .map(l => l.trim())
+            .filter(l => l.length > 0);
+
+        if (lines.length === 0) {
+            throw new Error("Kein Text gefunden.");
+        }
+
+        let match = "Spiel unbekannt";
+        let pick = "Tipp nicht erkannt";
+        let odds = "-";
+
+        // Fall 1: CleverTip 6–7 Zeilen
+        if (lines.length >= 6 && (lines[1].toLowerCase() === "vs" || lines[1].toLowerCase() === "vs.")) {
+            const team1 = lines[0];
+            const team2 = lines[2];
+            match = team1 + " – " + team2;
+
+            // Quote suchen
+            for (const line of lines) {
+                const m = line.replace(",", ".").match(/(\d+(\.\d+)?)/);
+                if (m) {
+                    odds = m[1];
+                    break;
+                }
+            }
+
+            // Tipp-Zeile suchen
+            for (let i = 3; i < lines.length; i++) {
+                const l = lines[i];
+                const lower = l.toLowerCase();
+                if (lower.startsWith("targettipp") || lower.startsWith("chart")) continue;
+                if (/^\d+[,.]?\d*$/.test(lower)) continue;
+                pick = l;
+                break;
+            }
+        } else {
+            // Einfacher 3-Zeilen-Fall:
+            // Spiel: ...
+            // Tipp: ...
+            // Quote: ...
+            const spielLine = lines.find(l => l.toLowerCase().startsWith("spiel"));
+            const tippLine = lines.find(l => l.toLowerCase().startsWith("tipp"));
+            const quoteLine = lines.find(l => l.toLowerCase().startsWith("quote"));
+
+            if (spielLine && spielLine.includes(":")) {
+                match = spielLine.split(":").slice(1).join(":").trim();
+            } else if (lines.length >= 1) {
+                match = lines[0];
+            }
+
+            if (tippLine && tippLine.includes(":")) {
+                pick = tippLine.split(":").slice(1).join(":").trim();
+            } else if (lines.length >= 2) {
+                pick = lines[1];
+            }
+
+            if (quoteLine && quoteLine.includes(":")) {
+                const q = quoteLine.split(":").slice(1).join(":").trim();
+                const m = q.replace(",", ".").match(/(\d+(\.\d+)?)/);
+                odds = m ? m[1] : "-";
+            } else {
+                for (const line of lines) {
+                    const m = line.replace(",", ".").match(/(\d+(\.\d+)?)/);
+                    if (m) {
+                        odds = m[1];
+                        break;
+                    }
+                }
+            }
+        }
+
+        return { match, pick, odds };
     }
 
     function renderTips() {
-      const container = document.getElementById("tipsContainer");
-      const tips = loadTips();
-      container.innerHTML = "";
+        const tips = loadTips();
+        const container = document.getElementById("tipsList");
+        container.innerHTML = "";
 
-      if (tips.length === 0) {
-        const p = document.createElement("p");
-        p.textContent = "Noch keine Tipps gespeichert.";
-        p.style.fontSize = "13px";
-        p.style.color = "#9ca3af";
-        container.appendChild(p);
-        return;
-      }
-
-      tips.forEach((tip, index) => {
-        const card = document.createElement("div");
-        card.className = "tip-card";
-
-        const main = document.createElement("div");
-        main.className = "tip-main";
-
-        const match = document.createElement("div");
-        match.className = "tip-match";
-        match.textContent = `Spiel: ${tip.match}`;
-
-        const pick = document.createElement("div");
-        pick.className = "tip-line";
-        pick.textContent = `Tipp: ${tip.pick}`;
-
-        main.appendChild(match);
-        main.appendChild(pick);
-
-        const meta = document.createElement("div");
-        meta.className = "tip-meta";
-
-        const quote = document.createElement("div");
-        quote.className = "quote-pill";
-        quote.textContent = `Quote: ${tip.odds || "-"}`;
-
-        const del = document.createElement("button");
-        del.className = "btn-small";
-        del.textContent = "Löschen";
-        del.addEventListener("click", () => {
-          const all = loadTips();
-          all.splice(index, 1);
-          saveTips(all);
-          renderTips();
-        });
-
-        meta.appendChild(quote);
-        meta.appendChild(del);
-
-        card.appendChild(main);
-        card.appendChild(meta);
-        container.appendChild(card);
-      });
-    }
-
-    function parseCleverTip(text) {
-      const lines = text
-        .split("\n")
-        .map(l => l.trim())
-        .filter(l => l.length > 0);
-
-      if (lines.length < 4) {
-        throw new Error("Zu wenig Zeilen. Bitte CleverTip-Block komplett einfügen.");
-      }
-
-      const team1 = lines[0];
-      let vsIndex = lines.findIndex(l => l.toLowerCase() === "vs");
-      let team2;
-
-      if (vsIndex >= 0 && vsIndex + 1 < lines.length) {
-        team2 = lines[vsIndex + 1];
-      } else if (lines.length >= 3) {
-        team2 = lines[2];
-      } else {
-        team2 = "";
-      }
-
-      let tipLineIndex = lines.findIndex(l => l.toLowerCase().includes("tipp"));
-      let pickLineIndex;
-
-      if (tipLineIndex >= 0 && tipLineIndex + 1 < lines.length) {
-        pickLineIndex = tipLineIndex + 1;
-      } else {
-        pickLineIndex = 3;
-      }
-
-      const pick = lines[pickLineIndex];
-
-      let odds = "-";
-      for (let i = lines.length - 1; i >= 0; i--) {
-        if (/^\d+(\.\d+)?$/.test(lines[i].replace(",", "."))) {
-          odds = lines[i].replace(",", ".");
-          break;
+        if (!tips.length) {
+            return;
         }
-      }
 
-      return {
-        match: `${team1} – ${team2}`,
-        pick: pick,
-        odds: odds
-      };
+        tips.forEach((tip, index) => {
+            const card = document.createElement("div");
+            card.className = "tip-card";
+
+            const left = document.createElement("div");
+            left.className = "tip-info";
+
+            const label = document.createElement("div");
+            label.className = "tip-label";
+            label.textContent = "Tipp " + (index + 1);
+
+            const match = document.createElement("div");
+            match.className = "tip-match";
+            match.textContent = tip.match;
+
+            const pick = document.createElement("div");
+            pick.className = "tip-pick";
+            pick.textContent = "Tipp: " + tip.pick;
+
+            left.appendChild(label);
+            left.appendChild(match);
+            left.appendChild(pick);
+
+            const right = document.createElement("div");
+            right.className = "chip-row";
+
+            const quota = document.createElement("div");
+            quota.className = "chip";
+            quota.textContent = "Quote: " + (tip.odds || "-");
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "btn-small";
+            deleteBtn.textContent = "Löschen";
+            deleteBtn.addEventListener("click", () => {
+                const current = loadTips();
+                current.splice(index, 1);
+                saveTips(current);
+                renderTips();
+            });
+
+            right.appendChild(quota);
+            right.appendChild(deleteBtn);
+
+            card.appendChild(left);
+            card.appendChild(right);
+
+            container.appendChild(card);
+        });
     }
 
     document.getElementById("btnAdd").addEventListener("click", () => {
-      const raw = document.getElementById("rawInput").value;
-      if (!raw.trim()) {
-        alert("Bitte CleverTip-Text einfügen.");
-        return;
-      }
-      try {
-        const tip = parseCleverTip(raw);
-        const tips = loadTips();
-        tips.push(tip);
-        saveTips(tips);
-        document.getElementById("rawInput").value = "";
-        renderTips();
-      } catch (e) {
-        alert(e.message || "Format konnte nicht erkannt werden.");
-      }
+        const raw = document.getElementById("rawInput").value;
+        if (!raw.trim()) {
+            alert("Bitte CleverTip-Text einfügen.");
+            return;
+        }
+        try {
+            const tip = parseCleverTip(raw);
+            const tips = loadTips();
+            tips.push(tip);
+            saveTips(tips);
+            document.getElementById("rawInput").value = "";
+            renderTips();
+        } catch (e) {
+            alert("Format konnte nicht erkannt werden. Fehler: " + e.message);
+        }
     });
 
     document.getElementById("btnClear").addEventListener("click", () => {
-      if (confirm("Alle gespeicherten Tipps löschen")) {
-        saveTips([]);
-        renderTips();
-      }
+        if (confirm("Alle gespeicherten Tipps löschen")) {
+            saveTips([]);
+            renderTips();
+        }
     });
 
-    document.getElementById("btnOpenCard").addEventListener("click", () => {
-      window.location.href = "karte.html";
+    document.getElementById("btnShowCard").addEventListener("click", () => {
+        window.location.href = "karte.html";
     });
 
     document.addEventListener("DOMContentLoaded", renderTips);
-  </script>
+</script>
 </body>
 </html>
