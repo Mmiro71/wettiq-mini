@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wettiq VIP – Tages-Tipps</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #161b2b 0, #050712 45%, #02030a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f5f5;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 980px;
+      padding: 32px 16px;
+    }
+
+    .card {
+      background: rgba(6, 9, 22, 0.96);
+      border-radius: 24px;
+      padding: 28px 24px 24px;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(92, 142, 255, 0.35);
+      backdrop-filter: blur(24px);
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 24px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f9fafb;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #c1c9ff;
+      opacity: 0.85;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(247, 208, 120, 0.65);
+      color: #f7d078;
+      background: radial-gradient(circle at top left, rgba(247, 208, 120, 0.24), transparent 55%);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #e5e7eb;
+    }
+
+    .input-area {
+      margin-bottom: 18px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      max-height: 220px;
+      resize: vertical;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 255, 0.45);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.20), rgba(15, 23, 42, 0.9));
+      padding: 14px 16px;
+      color: #e5e7eb;
+      font-size: 14px;
+      outline: none;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    textarea::placeholder {
+      color: rgba(209, 213, 219, 0.35);
+    }
+
+    .buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 11px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, background 0.1s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.60);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 255, 0.45);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(24, 32, 62, 0.98);
+    }
+
+    .btn-danger {
+      background: rgba(127, 29, 29, 0.92);
+      color: #fee2e2;
+      border: 1px solid rgba(239, 68, 68, 0.7);
+    }
+
+    .btn-danger:hover {
+      background: rgba(153, 27, 27, 0.96);
+    }
+
+    .hint {
+      font-size: 12px;
+      line-height: 1.4;
+      color: #9ca3af;
+      margin-bottom: 18px;
+    }
+
+    .hint span {
+      color: #e5e7eb;
+    }
+
+    .tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .tip-card {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), rgba(15, 23, 42, 0.95));
+      border-radius: 18px;
+      padding: 13px 14px;
+      border: 1px solid rgba(148, 163, 255, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tip-main {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .tip-match {
+      font-weight: 500;
+    }
+
+    .tip-line {
+      font-size: 13px;
+      color: #d1d5db;
+    }
+
+    .tip-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      min-width: 120px;
+    }
+
+    .quote-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      padding: 4px 11px;
+      font-size: 12px;
+      color: #e5e7eb;
+      background: radial-gradient(circle at top, rgba(59, 130, 246, 0.4), rgba(15, 23, 42, 0.98));
+    }
+
+    .btn-small {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 999px;
+      background: rgba(31, 41, 55, 0.96);
+      color: #e5e7eb;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    .btn-small:hover {
+      background: rgba(55, 65, 81, 0.98);
+    }
+
+    @media (max-width: 720px) {
+      .card {
+        padding: 20px 16px 18px;
+        border-radius: 20px;
+      }
+
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+
+      .buttons-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .tip-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .tip-meta {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="header-row">
+        <div>
+          <div class="title">Wettiq VIP</div>
+          <div class="subtitle">Tages-Tipps vorbereiten und als Karte anzeigen</div>
+        </div>
+        <div class="badge">Vip testphase</div>
+      </div>
+
+      <div class="section-title">Rohdaten aus CleverTip einfügen</div>
+      <div class="input-area">
+        <textarea id="rawInput" placeholder="Beispiel:
+
+Kroatien
+VS
+Färöer-Inseln
+TargetTIPP
+Über 2,5 Tore
+Chart QUOTE
+1.50"></textarea>
+      </div>
+
+      <div class="buttons-row">
+        <button class="btn-primary" id="btnAdd">Tipp hinzufügen</button>
+        <button class="btn-secondary" id="btnOpenCard">Tageskarte anzeigen</button>
+        <button class="btn-danger" id="btnClear">Alle Tipps löschen</button>
+      </div>
+
+      <p class="hint">
+        Hinweise: Du kannst Tipps mit 6 oder 7 Zeilen einfügen. Wenn du keine Quote kopierst, wird automatisch <span>"-"</span> gesetzt. Alle Tipps werden im Browser gespeichert und beim nächsten Öffnen wieder angezeigt.
+      </p>
+
+      <div id="tipsContainer" class="tips-list"></div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "wettiq_tips";
+
+    function loadTips() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error("Fehler beim Laden der Tipps", e);
+        return [];
+      }
+    }
+
+    function saveTips(tips) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tips));
+      } catch (e) {
+        console.error("Fehler beim Speichern der Tipps", e);
+      }
+    }
+
+    function renderTips() {
+      const container = document.getElementById("tipsContainer");
+      const tips = loadTips();
+      container.innerHTML = "";
+
+      if (tips.length === 0) {
+        const p = document.createElement("p");
+        p.textContent = "Noch keine Tipps gespeichert.";
+        p.style.fontSize = "13px";
+        p.style.color = "#9ca3af";
+        container.appendChild(p);
+        return;
+      }
+
+      tips.forEach((tip, index) => {
+        const card = document.createElement("div");
+        card.className = "tip-card";
+
+        const main = document.createElement("div");
+        main.className = "tip-main";
+
+        const match = document.createElement("div");
+        match.className = "tip-match";
+        match.textContent = `Spiel: ${tip.match}`;
+
+        const pick = document.createElement("div");
+        pick.className = "tip-line";
+        pick.textContent = `Tipp: ${tip.pick}`;
+
+        main.appendChild(match);
+        main.appendChild(pick);
+
+        const meta = document.createElement("div");
+        meta.className = "tip-meta";
+
+        const quote = document.createElement("div");
+        quote.className = "quote-pill";
+        quote.textContent = `Quote: ${tip.odds || "-"}`;
+
+        const del = document.createElement("button");
+        del.className = "btn-small";
+        del.textContent = "Löschen";
+        del.addEventListener("click", () => {
+          const all = loadTips();
+          all.splice(index, 1);
+          saveTips(all);
+          renderTips();
+        });
+
+        meta.appendChild(quote);
+        meta.appendChild(del);
+
+        card.appendChild(main);
+        card.appendChild(meta);
+        container.appendChild(card);
+      });
+    }
+
+    function parseCleverTip(text) {
+      const lines = text
+        .split("\n")
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+
+      if (lines.length < 4) {
+        throw new Error("Zu wenig Zeilen. Bitte CleverTip-Block komplett einfügen.");
+      }
+
+      const team1 = lines[0];
+      let vsIndex = lines.findIndex(l => l.toLowerCase() === "vs");
+      let team2;
+
+      if (vsIndex >= 0 && vsIndex + 1 < lines.length) {
+        team2 = lines[vsIndex + 1];
+      } else if (lines.length >= 3) {
+        team2 = lines[2];
+      } else {
+        team2 = "";
+      }
+
+      let tipLineIndex = lines.findIndex(l => l.toLowerCase().includes("tipp"));
+      let pickLineIndex;
+
+      if (tipLineIndex >= 0 && tipLineIndex + 1 < lines.length) {
+        pickLineIndex = tipLineIndex + 1;
+      } else {
+        pickLineIndex = 3;
+      }
+
+      const pick = lines[pickLineIndex];
+
+      let odds = "-";
+      for (let i = lines.length - 1; i >= 0; i--) {
+        if (/^\d+(\.\d+)?$/.test(lines[i].replace(",", "."))) {
+          odds = lines[i].replace(",", ".");
+          break;
+        }
+      }
+
+      return {
+        match: `${team1} – ${team2}`,
+        pick: pick,
+        odds: odds
+      };
+    }
+
+    document.getElementById("btnAdd").addEventListener("click", () => {
+      const raw = document.getElementById("rawInput").value;
+      if (!raw.trim()) {
+        alert("Bitte CleverTip-Text einfügen.");
+        return;
+      }
+      try {
+        const tip = parseCleverTip(raw);
+        const tips = loadTips();
+        tips.push(tip);
+        saveTips(tips);
+        document.getElementById("rawInput").value = "";
+        renderTips();
+      } catch (e) {
+        alert(e.message || "Format konnte nicht erkannt werden.");
+      }
+    });
+
+    document.getElementById("btnClear").addEventListener("click", () => {
+      if (confirm("Alle gespeicherten Tipps löschen")) {
+        saveTips([]);
+        renderTips();
+      }
+    });
+
+    document.getElementById("btnOpenCard").addEventListener("click", () => {
+      window.location.href = "karte.html";
+    });
+
+    document.addEventListener("DOMContentLoaded", renderTips);
+  </script>
+</body>
+</html>
