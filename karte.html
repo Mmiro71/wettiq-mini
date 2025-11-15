@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tageskarte</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background:#020617;
+      font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+      color:#e2e8f0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .wrapper {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+
+    /* Die eigentliche Karte – nur 400px breit */
+    #card {
+      width:400px;
+      background:#0b1225;
+      border:1px solid #334155;
+      border-radius:16px;
+      padding:16px 18px 18px;
+    }
+
+    h1 {
+      font-size:14px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:#e5e7eb;
+      text-align:center;
+    }
+    h2 {
+      font-size:14px;
+      color:#c7d2fe;
+      text-align:center;
+      margin-top:4px;
+    }
+    #dateLine {
+      font-size:12px;
+      color:#c7d2fe;
+      margin-top:6px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      text-align:center;
+    }
+
+    .tipp {
+      margin-top:14px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid #334155;
+      background:#020617;
+    }
+    .tipp-title {
+      font-size:11px;
+      color:#94a3b8;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      margin-bottom:2px;
+      text-align:center;
+    }
+    .match {
+      font-size:16px;
+      font-weight:600;
+      margin-bottom:4px;
+      text-align:center;          /* Tipp mittig */
+    }
+    .sub {
+      font-size:13px;
+      color:#d1d5db;
+      margin-bottom:2px;
+      text-align:center;
+    }
+    .quote {
+      font-size:13px;
+      color:#e5e7eb;
+      text-align:center;
+    }
+
+    footer {
+      margin-top:14px;
+      font-size:11px;
+      color:#94a3b8;
+      text-align:center;
+    }
+
+    .buttons {
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      width:100%;
+    }
+    button {
+      padding:8px 14px;
+      border:none;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    #downloadBtn {
+      background:#3b82f6;
+      color:white;
+    }
+    #backBtn {
+      background:#1e293b;
+      color:#e2e8f0;
+      border:1px solid #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div id="card">
+      <h1>Wettiq VIP</h1>
+      <h2>Ausgewählte Tages-Tipps</h2>
+      <div id="dateLine"></div>
+
+      <div id="tipsContainer"></div>
+
+      <footer>Hinweis: Wetten immer mit Verantwortung.</footer>
+    </div>
+
+    <div class="buttons">
+      <button id="backBtn">Zurück</button>
+      <button id="downloadBtn">Als Bild herunterladen</button>
+    </div>
+  </div>
+
+  <!-- html2canvas für Screenshot der Karte -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const tips = JSON.parse(localStorage.getItem("wettiq_tips") || "[]");
+
+    function formatDate(d) {
+      const days=["So","Mo","Di","Mi","Do","Fr","Sa"];
+      const dd=String(d.getDate()).padStart(2,"0");
+      const mm=String(d.getMonth()+1).padStart(2,"0");
+      const yyyy=d.getFullYear();
+      return `${days[d.getDay()]} – ${dd}.${mm}.${yyyy}`;
+    }
+
+    document.getElementById("dateLine").textContent =
+      "Tageskarte – " + formatDate(new Date());
+
+    const container = document.getElementById("tipsContainer");
+
+    tips.forEach((t,i)=>{
+      const div=document.createElement("div");
+      div.className="tipp";
+      div.innerHTML = `
+        <div class="tipp-title">Tipp ${i+1}</div>
+        <div class="match">${t.team1} – ${t.team2}</div>
+        <div class="sub">Tipp: ${t.tipText}</div>
+        <div class="quote">Quote: ${t.quote}</div>
+      `;
+      container.appendChild(div);
+    });
+
+    document.getElementById("downloadBtn").onclick = () => {
+      const card = document.getElementById("card");
+      html2canvas(card, {backgroundColor:"#020617", scale:3}).then(canvas => {
+        const link=document.createElement("a");
+        link.download="wettiq_tageskarte.png";
+        link.href=canvas.toDataURL("image/png");
+        link.click();
+      });
+    };
+
+    document.getElementById("backBtn").onclick = () => {
+      window.location.href = "index.html";
+    };
+  </script>
+</body>
+</html>
