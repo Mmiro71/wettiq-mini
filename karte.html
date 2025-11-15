@@ -9,365 +9,359 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "SF Pro Text", sans-serif;
         }
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at top, #101426 0, #050712 45%, #02030a 100%);
+            background: radial-gradient(circle at top, #161b2b 0, #050712 45%, #02030a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px 12px;
+            padding: 30px 12px;
             color: #f5f5f5;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "SF Pro Text", sans-serif;
         }
 
-        .frame {
-            max-width: 780px;
+        .page {
             width: 100%;
+            max-width: 980px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-        }
-
-        .card-wrapper {
-            width: 100%;
-            background: linear-gradient(135deg, #12182a, #0c1220);
-            border-radius: 28px;
-            padding: 28px 32px 32px;
-            box-shadow:
-                0 28px 60px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255, 255, 255, 0.02);
-            display: flex;
-            flex-direction: column;
             gap: 18px;
         }
 
-        .card-header {
+        .frame {
+            width: 100%;
+            max-width: 780px;
+            background: radial-gradient(circle at 0 0, #151c35, #050714 80%);
+            border-radius: 30px;
+            padding: 26px 26px 26px;
+            border: 1px solid rgba(120, 142, 255, 0.35);
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .frame-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 4px;
+            margin-bottom: 18px;
+            gap: 10px;
         }
 
-        .card-title-block {
+        .frame-left {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
 
-        .app-title {
-            letter-spacing: 0.18em;
+        .frame-title {
+            letter-spacing: 0.22em;
+            font-size: 12px;
             text-transform: uppercase;
+            color: #a7b4ff;
+        }
+
+        .frame-subtitle {
             font-size: 13px;
-            color: #e7ecff;
+            color: rgba(220, 228, 255, 0.9);
         }
 
-        .card-subtitle {
-            font-size: 13px;
-            color: #aeb7d9;
-        }
-
-        .card-meta {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .tag-date {
-            font-size: 11px;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: #8f9cc5;
-        }
-
-        .tag-pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 11px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #f6c35c, #f09b2d);
-            color: #1c1320;
-            font-weight: 500;
-        }
-
-        .tips-list {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .tip-row {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 16px;
-            padding: 14px 18px;
-            border-radius: 18px;
-            background: rgba(12, 17, 32, 0.96);
-            border: 1px solid rgba(132, 148, 214, 0.22);
-        }
-
-        .tip-badge {
-            min-width: 60px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 11px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            background: rgba(44, 67, 148, 0.9);
-            color: #f5f6ff;
-        }
-
-        .tip-main {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .tip-match {
-            font-size: 15px;
-            color: #f7f7ff;
-        }
-
-        .tip-text {
-            font-size: 13px;
-            color: #c2c8e3;
-        }
-
-        .tip-quote {
+        .frame-right {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 4px;
-            min-width: 72px;
+            gap: 6px;
         }
 
-        .quote-label {
+        .date-label {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(191, 204, 255, 0.9);
+        }
+
+        .pill-yellow {
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 7px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 220, 146, 0.9);
+            background: linear-gradient(90deg, rgba(255, 204, 115, 0.32), rgba(255, 220, 158, 0.18));
+            color: #ffdf9c;
+        }
+
+        .tips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .tip-card {
+            border-radius: 22px;
+            padding: 13px 16px;
+            background: radial-gradient(circle at 0 0, rgba(48, 68, 138, 0.38), rgba(7, 10, 30, 0.98));
+            border: 1px solid rgba(121, 142, 255, 0.42);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tip-left {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .tip-label {
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.16em;
-            color: #9aa4d0;
+            color: rgba(179, 193, 255, 0.9);
         }
 
-        .quote-value {
-            font-size: 15px;
-            padding: 6px 12px;
+        .tip-match {
+            font-size: 14px;
+            color: #f7f8ff;
+        }
+
+        .tip-pick {
+            font-size: 13px;
+            color: rgba(211, 220, 255, 0.9);
+        }
+
+        .tip-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .quote-chip {
             border-radius: 999px;
-            background: rgba(22, 38, 92, 0.9);
-            color: #f5f6ff;
+            padding: 6px 13px;
+            font-size: 12px;
+            border: 1px solid rgba(186, 203, 255, 0.9);
+            color: #e3ebff;
         }
 
-        .card-footer {
-            margin-top: 8px;
+        .notice {
             font-size: 11px;
-            color: #949fc4;
-            text-align: right;
+            color: rgba(170, 183, 230, 0.9);
+            margin-top: 4px;
         }
 
-        .buttons {
+        .notice span {
+            color: #ffcb7a;
+        }
+
+        .buttons-row {
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 100%;
-            max-width: 340px;
+            max-width: 420px;
+            margin-top: 4px;
         }
 
-        .download-btn,
-        .back-btn {
-            width: 100%;
-            padding: 12px 28px;
-            font-size: 15px;
+        .btn {
             border-radius: 999px;
+            padding: 12px 18px;
+            font-size: 14px;
             border: none;
             cursor: pointer;
-            transition: 0.18s;
+            font-family: inherit;
+            transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease, opacity 0.08s ease;
         }
 
-        .download-btn {
-            background: #3a6df0;
-            color: white;
+        .btn-primary {
+            background: linear-gradient(135deg, #2f66ff, #4978ff);
+            color: #fdfdff;
+            box-shadow: 0 10px 26px rgba(10, 40, 120, 0.8);
         }
 
-        .download-btn:hover {
-            background: #264fd4;
+        .btn-primary:hover {
             transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(10, 40, 120, 0.95);
         }
 
-        .back-btn {
+        .btn-ghost {
             background: transparent;
-            color: #c5cbea;
-            border: 1px solid rgba(151, 164, 214, 0.6);
+            border: 1px solid rgba(116, 135, 230, 0.9);
+            color: #dbe3ff;
         }
 
-        .back-btn:hover {
-            background: rgba(10, 18, 38, 0.9);
+        .btn-ghost:hover {
+            background: rgba(20, 30, 85, 0.8);
+            box-shadow: 0 7px 18px rgba(8, 18, 70, 0.75);
         }
 
-        @media (max-width: 600px) {
-            .card-wrapper {
-                padding: 22px 18px 26px;
+        @media (max-width: 720px) {
+            .frame {
+                border-radius: 26px;
+                padding: 20px 18px 20px;
             }
 
-            .tip-row {
-                grid-template-columns: 1fr;
+            .frame-header {
+                flex-direction: column;
                 align-items: flex-start;
             }
 
-            .tip-badge {
-                align-self: flex-start;
-            }
-
-            .tip-quote {
+            .frame-right {
                 align-items: flex-start;
             }
 
-            .buttons {
-                max-width: none;
+            .tip-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tip-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .buttons-row {
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-<div class="frame">
-    <div class="card-wrapper" id="cardArea">
-        <div class="card-header">
-            <div class="card-title-block">
-                <div class="app-title">Wettiq VIP</div>
-                <div class="card-subtitle">Ausgewählte Tages-Tipps</div>
+<div class="page">
+    <div id="cardFrame" class="frame">
+        <div class="frame-header">
+            <div class="frame-left">
+                <div class="frame-title">Wettiq VIP</div>
+                <div class="frame-subtitle">Ausgewählte Tages-Tipps</div>
             </div>
-            <div class="card-meta">
-                <div class="tag-date" id="cardDateLabel">
-                    Tageskarte
-                </div>
-                <div class="tag-pill">Mitgliederbereich</div>
+            <div class="frame-right">
+                <div class="date-label" id="dateLabel">Tageskarte</div>
+                <div class="pill-yellow">Mitgliederbereich</div>
             </div>
         </div>
 
-        <div class="tips-list" id="tipsList">
-            <!-- Tipps werden hier per JavaScript eingefügt -->
-        </div>
+        <div id="tipsContainer" class="tips-list"></div>
 
-        <div class="card-footer">
+        <div class="notice" id="noticeText">
             Hinweis: Wetten immer mit Verantwortung.
         </div>
     </div>
 
-    <div class="buttons">
-        <button class="download-btn" id="btnDownload">Als Bild herunterladen</button>
-
-        <button class="back-btn" onclick="window.location.href='index.html'">
-            Zurück zur Eingabe
-        </button>
+    <div class="buttons-row">
+        <button class="btn btn-primary" id="btnDownload">Als Bild herunterladen</button>
+        <button class="btn btn-ghost" id="btnBack">Zurück zur Eingabe</button>
     </div>
 </div>
 
-<!-- html2canvas für Screenshot-Download -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
 <script>
-    // Datum oben rechts setzen
-    function setDateLabel() {
-        const label = document.getElementById("cardDateLabel");
-        const heute = new Date();
-        const formatter = new Intl.DateTimeFormat("de-DE", {
-            weekday: "long",
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        });
-        label.textContent = "Tageskarte – " + formatter.format(heute);
+    const STORAGE_KEY = "wettiqTips";
+
+    function loadTips() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return [];
+            const arr = JSON.parse(raw);
+            return Array.isArray(arr) ? arr : [];
+        } catch (e) {
+            return [];
+        }
     }
 
-    // Tipps aus localStorage lesen und anzeigen
-    function renderTips() {
-        const container = document.getElementById("tipsList");
+    function formatDate() {
+        const now = new Date();
+        const weekday = now.toLocaleDateString("de-DE", { weekday: "long" });
+        const date = now.toLocaleDateString("de-DE");
+        return weekday.charAt(0).toUpperCase() + weekday.slice(1) + ", " + date;
+    }
+
+    function renderCard() {
+        const tips = loadTips();
+        const container = document.getElementById("tipsContainer");
+        const notice = document.getElementById("noticeText");
+
+        document.getElementById("dateLabel").textContent =
+            "Tageskarte – " + formatDate();
+
         container.innerHTML = "";
 
-        // gleicher Key wie auf der Eingabeseite
-        const tips = JSON.parse(localStorage.getItem("wettiqTips") || "[]");
-
         if (!tips.length) {
-            const info = document.createElement("div");
-            info.style.fontSize = "13px";
-            info.style.color = "#b2bddf";
-            info.textContent = "Keine Tipps gefunden. Bitte zuerst auf der Eingabeseite Tipps erstellen.";
-            container.appendChild(info);
+            const msg = document.createElement("div");
+            msg.style.fontSize = "13px";
+            msg.style.color = "rgba(210,220,255,0.9)";
+            msg.textContent =
+                "Keine Tipps gefunden. Bitte zuerst auf der Eingabeseite Tipps erstellen.";
+            container.appendChild(msg);
             return;
         }
 
         tips.forEach((tip, index) => {
-            const row = document.createElement("div");
-            row.className = "tip-row";
+            const card = document.createElement("div");
+            card.className = "tip-card";
 
-            const badge = document.createElement("div");
-            badge.className = "tip-badge";
-            badge.textContent = "Tipp " + (index + 1);
+            const left = document.createElement("div");
+            left.className = "tip-left";
 
-            const main = document.createElement("div");
-            main.className = "tip-main";
+            const label = document.createElement("div");
+            label.className = "tip-label";
+            label.textContent = "Tipp " + (index + 1);
 
             const match = document.createElement("div");
             match.className = "tip-match";
-            match.textContent = tip.match || tip.spiel || "Spiel";
+            match.textContent = tip.match;
 
-            const text = document.createElement("div");
-            text.className = "tip-text";
-            const tippText = tip.tip || tip.tipp || tip.text || "";
-            text.textContent = tippText ? "Tipp: " + tippText : "";
+            const pick = document.createElement("div");
+            pick.className = "tip-pick";
+            pick.textContent = "Tipp: " + tip.pick;
 
-            main.appendChild(match);
-            main.appendChild(text);
+            left.appendChild(label);
+            left.appendChild(match);
+            left.appendChild(pick);
 
-            const quoteBox = document.createElement("div");
-            quoteBox.className = "tip-quote";
+            const right = document.createElement("div");
+            right.className = "tip-right";
 
-            const qLabel = document.createElement("div");
-            qLabel.className = "quote-label";
-            qLabel.textContent = "Quote";
+            const quote = document.createElement("div");
+            quote.className = "quote-chip";
+            quote.textContent = "Quote: " + (tip.odds || "-");
 
-            const qVal = document.createElement("div");
-            qVal.className = "quote-value";
-            qVal.textContent = tip.quote || tip.quotes || "-";
+            right.appendChild(quote);
 
-            quoteBox.appendChild(qLabel);
-            quoteBox.appendChild(qVal);
+            card.appendChild(left);
+            card.appendChild(right);
 
-            row.appendChild(badge);
-            row.appendChild(main);
-            row.appendChild(quoteBox);
-
-            container.appendChild(row);
+            container.appendChild(card);
         });
+
+        notice.innerHTML = 'Hinweis: Wetten immer mit Verantwortung.';
     }
 
-    // Karte als Bild herunterladen
-    function setupDownload() {
-        const btn = document.getElementById("btnDownload");
-        btn.addEventListener("click", () => {
-            const area = document.getElementById("cardArea");
-            html2canvas(area, {scale: 3}).then(canvas => {
-                const link = document.createElement("a");
-                link.download = "wettiq-vip-tageskarte.png";
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-            });
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        setDateLabel();
-        renderTips();
-        setupDownload();
+    document.getElementById("btnBack").addEventListener("click", () => {
+        window.location.href = "index.html";
     });
+
+    document.getElementById("btnDownload").addEventListener("click", () => {
+        const frame = document.getElementById("cardFrame");
+        html2canvas(frame, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: null
+        }).then(canvas => {
+            const link = document.createElement("a");
+            link.download = "wettiq-vip-tageskarte.png";
+            link.href = canvas.toDataURL("image/png");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }).catch(err => {
+            alert("Bild konnte nicht erzeugt werden. Fehler: " + err.message);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", renderCard);
 </script>
 </body>
 </html>
